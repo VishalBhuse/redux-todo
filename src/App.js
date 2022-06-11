@@ -11,7 +11,6 @@ function App() {
       <header className="App-header"> 
 
       <Navabr />
-
       <Routes>
       <Route path='/' element={<Home />}></Route>
       <Route path='/total' element={<Total />}></Route>
