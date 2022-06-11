@@ -8,6 +8,7 @@ import Todo from './Component/Todo';
 function App() {
   return (
     <div className="App">
+      <header className="App-header"> 
 
       <Navabr />
 
@@ -16,9 +17,8 @@ function App() {
       <Route path='/total' element={<Total />}></Route>
       <Route path='/todo/:id' element={<Todo />}></Route>
       </Routes>
-      {/* <header className="App-header">
        
-      </header> */}
+      </header> 
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useParams } from "react-router-dom";
+import styles from "./All.module.css";
+
 
 const Todo = () => {
   const [check, setcheck] = useState(false);
@@ -39,7 +41,10 @@ const Todo = () => {
     <div>
       <h1 hidden={check === false ? false : true}>Todo: {data.value}</h1>
 
+<div className={styles.inputbox}>
+
       <input
+      className={styles.input}
         ref={ref}
         placeholder="todo here..."
         type="text"
@@ -47,12 +52,14 @@ const Todo = () => {
       />
 
       <button
+      className={styles.edit}
         onClick={() => {
           check === false ? handlecheck() : handleedit(data.id);
         }}
-      >
+        >
         {check === false ? "Edit" : "Submit"}
       </button>
+        </div>
     </div>
   );
 };

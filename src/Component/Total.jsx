@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import styles from './All.module.css'; 
 
 const Total = () => {
     const [show, setshow] = useState([]);
@@ -14,12 +15,15 @@ const Total = () => {
     
     return (
     <div>
-        <h2>Total</h2>
+        <h2>Total Todo-List</h2>
 
         {show.map((el)=>(
 
             <div key={el.id}>
-                <h2>{el.value}</h2>
+                <ul className={styles.total}>
+                    <li>{el.value}</li>
+                </ul>
+                {/* <h4>{el.value}</h4> */}
                 {/* <h2>{el.isCompleted === false ? el.value: ""}</h2> */}
 
             </div>

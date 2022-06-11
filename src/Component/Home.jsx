@@ -8,9 +8,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const ref = useRef();
   const todos = useSelector((state) => state.todos);
-  const [refresh, setrefresh] = useState("")
+  const [refresh, setrefresh] = useState("");
 
   const addtodof = () => {
+    setrefresh(Date.now());
     fetch("http://localhost:8080/todosdb", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -25,10 +26,8 @@ const Home = () => {
       .then((r) => dispatch(ADDTODO(r)));
   };
 
- 
-
   const toggleinput = (id, value) => {
-    setrefresh(Date.now())
+    setrefresh(Date.now());
     fetch(`http://localhost:8080/todosdb/${id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
@@ -43,6 +42,7 @@ const Home = () => {
   };
 
   const handleremove = (index) => {
+    setrefresh(Date.now());
     fetch(`http://localhost:8080/todosdb/${index}`, {
       method: "DELETE",
     });
@@ -60,20 +60,23 @@ const Home = () => {
 
   return (
     <div>
-      <input type="text" ref={ref} placeholder="enter your todo" />
-      <button onClick={() => addtodof()}>Add</button>
+      <h2>Todo List</h2>
+      <div className={styles.inputbox}>
+        <input
+          type="text"
+          ref={ref}
+          placeholder="enter your todo"
+          className={styles.input}
+        />
+        <button className={styles.submit} onClick={() => addtodof()}>
+          Add
+        </button>
+      </div>
       <br />
 
       {todos.map((el) => (
         <div key={el.id}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-            }}
-          >
+          <div className={styles.todolist}>
             <input
               checked={el.isCompleted === true ? true : false}
               onChange={(e) => toggleinput(el.id, e.target.checked)}
@@ -88,9 +91,14 @@ const Home = () => {
               {el.value}
             </p>
             <Link to={`/todo/${el.id}`}>
-              <button>Edit</button>
+              <button className={styles.edit}>Edit</button>
             </Link>
-            <button onClick={() => handleremove(el.id)}>Remove</button>
+            <button
+              className={styles.remove}
+              onClick={() => handleremove(el.id)}
+            >
+              Remove
+            </button>
           </div>
         </div>
       ))}
